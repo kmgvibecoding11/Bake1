@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRD: ТЗ на ликвидацию последствий разведки УВ</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1d2430;--muted:#5d6878;--accent:#1f6f5c;--accent-soft:#e3f1ed;--line:#dde2e8;--warn:#fff4d6}
+@media (prefers-color-scheme:dark){:root{--bg:#14181d;--card:#1c2229;--text:#e6e9ed;--muted:#97a1ae;--accent:#4fc3a1;--accent-soft:#1f3a33;--line:#2d3640;--warn:#3a3213}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:32px;max-width:1180px;margin:0 auto;padding:24px 16px}
+nav{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow:auto;font-size:14px}
+nav h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+nav a{display:block;padding:5px 10px;color:var(--muted);text-decoration:none;border-left:2px solid var(--line)}
+nav a:hover{color:var(--accent);border-color:var(--accent)}
+main{min-width:0}
+header.hero{background:var(--accent);color:#fff;border-radius:14px;padding:32px 28px;margin-bottom:24px}
+header.hero h1{margin:0 0 12px;font-size:clamp(22px,3.5vw,32px);line-height:1.25}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:rgba(255,255,255,.18);padding:3px 12px;border-radius:99px;font-size:14px}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:16px;scroll-margin-top:16px}
+h2{margin:0 0 12px;font-size:20px}
+h3{margin:20px 0 8px;font-size:16px;color:var(--accent)}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0}
+li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--accent-soft);font-weight:600;white-space:nowrap}
+.fr{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:13px;padding:0 8px;border-radius:6px;margin-right:6px}
+.tag{font-size:12.5px;padding:2px 8px;border-radius:6px;background:var(--accent-soft);white-space:nowrap}
+.tag.warn{background:var(--warn)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cols>div{border:1px solid var(--line);border-radius:10px;padding:4px 16px 8px}
+.in h3{color:var(--accent)}.out h3{color:#b3412f}
+.risk li::marker{color:#b3412f}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:16px}
+@media (max-width:860px){.layout{grid-template-columns:1fr}nav{display:none}.cols{grid-template-columns:1fr}section{padding:18px 16px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h2>Содержание</h2>
+  <a href="#s1">1. Обзор</a>
+  <a href="#s2">2. Проблема</a>
+  <a href="#s3">3. Пользователи</a>
+  <a href="#s4">4. Цели и метрики</a>
+  <a href="#s5">5. Объём</a>
+  <a href="#s6">6. Структура сайта</a>
+  <a href="#s7">7. Функциональные требования</a>
+  <a href="#s8">8. Содержание шаблона</a>
+  <a href="#s9">9. Нефункциональные требования</a>
+  <a href="#s10">10. Модель данных</a>
+  <a href="#s11">11. Этапы</a>
+  <a href="#s12">12. Риски</a>
+</nav>
+<main>
+<header class="hero">
+  <h1>PRD: веб-сервис «ТЗ на ликвидацию последствий операций по разведке углеводородов (РК)»</h1>
+  <div class="meta"><span class="chip">Версия 0.1</span><span class="chip">02.10.2026</span><span class="chip">Черновик</span><span class="chip">Только углеводороды</span></div>
+</header>
+
+<section id="s1"><h2>1. Обзор</h2>
+<p>Сервис превращает типовое ТЗ на ликвидацию последствий разведки углеводородов (УВ) в онлайн-шаблон. Недропользователь заполняет поля объекта, сервис собирает готовое ТЗ по нормам Республики Казахстан и выгружает его в DOCX и PDF.</p>
+<p>Источник контента — текстовая версия ТЗ (разделы 1–7, нормативная база РК).</p></section>
+
+<section id="s2"><h2>2. Проблема</h2><ul>
+<li>ТЗ составляют вручную из старых документов. Из-за этого ошибаются в ссылках на отменённые нормы и забывают обязательные разделы.</li>
+<li>Общие шаблоны не учитывают специфику разведки углеводородов, например противовыбросовое оборудование.</li>
+<li>Сроки, объёмы и перечни выработок разбросаны по разным файлам и не сверяются между собой.</li></ul></section>
+
+<section id="s3"><h2>3. Пользователи</h2><div class="table-wrap"><table>
+<tr><th>Роль</th><th>Задача</th><th>Частота</th></tr>
+<tr><td>Инженер-геолог недропользователя</td><td>Заполнить ТЗ по своему участку</td><td>Несколько раз в год</td></tr>
+<tr><td>Эколог / специалист по рекультивации</td><td>Проверить разделы 5.5–5.6 и 6.4</td><td>По каждому ТЗ</td></tr>
+<tr><td>Специалист по закупкам</td><td>Приложить ТЗ к закупу, выгрузить DOCX</td><td>По каждому закупу</td></tr>
+<tr><td>Подрядчик (Исполнитель)</td><td>Прочитать ТЗ, задать вопросы</td><td>По каждому закупу</td></tr>
+</table></div></section>
+
+<section id="s4"><h2>4. Цели и метрики</h2><div class="table-wrap"><table>
+<tr><th>Цель</th><th>Метрика</th><th>Целевое значение</th></tr>
+<tr><td>Сократить время подготовки ТЗ</td><td>Время от создания до выгрузки</td><td>≤ 2 часа (сейчас 1–3 дня)</td></tr>
+<tr><td>Исключить пропуск обязательных полей</td><td>Доля ТЗ, выгруженных с незаполненными полями</td><td>0 % без явного подтверждения</td></tr>
+<tr><td>Актуальная нормативная база</td><td>Дата последней сверки перечня норм</td><td>Не старше 90 дней</td></tr>
+</table></div></section>
+
+<section id="s5"><h2>5. Объём</h2>
+<div class="cols">
+<div class="in"><h3>Входит в MVP</h3><ul>
+<li>Шаблон ТЗ для разведки углеводородов (УВ).</li>
+<li>Пошаговая форма заполнения полей-заглушек.</li>
+<li>Таблица выработок (Приложение 1) и ведомость объёмов (Приложение 2).</li>
+<li>Предпросмотр и экспорт в DOCX и PDF.</li>
+<li>Справочник нормативных документов РК со ссылками на adilet.zan.kz.</li></ul></div>
+<div class="out"><h3>Не входит в MVP</h3><ul>
+<li>Электронная подпись (ЭЦП НУЦ РК) и согласование внутри сервиса.</li>
+<li>Интеграция с порталами госзакупок и системой ЕГСУ недр.</li>
+<li>Расчёт стоимости ликвидации.</li></ul></div>
+</div></section>
+
+<section id="s6"><h2>6. Структура сайта</h2><ol>
+<li><b>Главная.</b> Назначение сервиса и кнопка «Создать ТЗ».</li>
+<li><b>Мои ТЗ.</b> Список черновиков и готовых документов со статусом и датой.</li>
+<li><b>Мастер заполнения.</b> Шаги по разделам ТЗ (см. п. 7.2).</li>
+<li><b>Предпросмотр.</b> Полный текст ТЗ с подсветкой незаполненных полей.</li>
+<li><b>Нормативная база.</b> Перечень норм РК с датой сверки.</li>
+<li><b>Текстовая версия.</b> Шаблон ТЗ целиком, без формы, для чтения и копирования.</li></ol></section>
+
+<section id="s7"><h2>7. Функциональные требования</h2>
+
+<h3>7.1. Создание ТЗ</h3><ul>
+<li><span class="fr">FR-1</span>Пользователь создаёт ТЗ на разведку углеводородов.</li>
+<li><span class="fr">FR-2</span>Состав нормативной базы и формулировки п. 5.2 и 6.3 рассчитаны на углеводороды, включая противовыбросовое оборудование.</li>
+<li><span class="fr">FR-3</span>Черновик сохраняется автоматически не реже одного раза в 30 секунд.</li></ul>
+
+<h3>7.2. Мастер заполнения</h3><div class="table-wrap"><table>
+<tr><th>Шаг</th><th>Раздел ТЗ</th><th>Поля</th></tr>
+<tr><td>1</td><td>1. Общие сведения</td><td>Заказчик, БИН, адрес; Исполнитель; область, район, кадастровые номера; лицензия/контракт № и дата; договор; сроки</td></tr>
+<tr><td>2</td><td>3. Характеристика объекта</td><td>Таблица выработок; площадь нарушенных земель, га; категория земель; природные условия</td></tr>
+<tr><td>3</td><td>5. Состав работ</td><td>Изоляционные мосты, м; глубина среза обсадки, м; слой засыпки, м; запас на усадку, %; толщина ПСП, см; срок ухода за посевами, лет</td></tr>
+<tr><td>4</td><td>6. Требования</td><td>Минимальный опыт Исполнителя, лет</td></tr>
+<tr><td>5</td><td>7. Приёмка</td><td>Проективное покрытие, %; срок сдачи отчёта, дней; гарантийный срок, мес.; даты этапов</td></tr>
+<tr><td>6</td><td>Согласование</td><td>Должности и ФИО подписантов</td></tr>
+</table></div>
+<ul>
+<li><span class="fr">FR-4</span>Каждое поле имеет тип и проверку: БИН — 12 цифр, даты — формат ДД.ММ.ГГГГ, проценты — 0–100.</li>
+<li><span class="fr">FR-5</span>Даты окончания этапа не могут быть раньше дат начала. Биологический этап начинается не раньше окончания технического.</li>
+<li><span class="fr">FR-6</span>Для числовых параметров показываются типовые значения из шаблона, например 0,5–1,0 м для среза обсадки.</li></ul>
+
+<h3>7.3. Таблица выработок</h3><ul>
+<li><span class="fr">FR-7</span>Строка таблицы содержит: тип объекта, номер, координаты (WGS-84), глубину, диаметр, объём, площадь нарушения.</li>
+<li><span class="fr">FR-8</span>Таблицу можно загрузить из XLSX или CSV по шаблону.</li>
+<li><span class="fr">FR-9</span>Итоговая площадь нарушенных земель в разделе 3 считается из таблицы автоматически.</li></ul>
+
+<h3>7.4. Предпросмотр и экспорт</h3><ul>
+<li><span class="fr">FR-10</span>Предпросмотр показывает полный текст ТЗ. Незаполненные поля выделены цветом и ведут к своему шагу.</li>
+<li><span class="fr">FR-11</span>Экспорт в DOCX и PDF формата A4 с нумерацией разделов, как в шаблоне.</li>
+<li><span class="fr">FR-12</span>При экспорте с пустыми полями сервис предупреждает и просит подтверждения. Пустые поля в файле остаются как «[__]».</li></ul>
+
+<h3>7.5. Нормативная база</h3><ul>
+<li><span class="fr">FR-13</span>Каждая норма хранится с названием, номером, датой, ссылкой на adilet.zan.kz, и датой сверки.</li>
+<li><span class="fr">FR-14</span>Администратор может отметить норму как утратившую силу. Она исчезает из новых ТЗ, а в старых помечается предупреждением.</li></ul>
+</section>
+
+<section id="s8"><h2>8. Содержание шаблона</h2>
+<p>Тексты разделов берутся из текстовой версии ТЗ без изменений по смыслу:</p>
+<ol>
+<li>Общие сведения</li><li>Цели и задачи</li><li>Характеристика объекта</li><li>Нормативная база Республики Казахстан</li>
+<li>Состав и объём работ (5.1–5.6)</li><li>Требования к выполнению работ (6.1–6.4)</li><li>Контроль, приёмка и отчётность (7.1–7.5)</li></ol>
+<h3>Нормативная база MVP</h3><div class="table-wrap"><table>
+<tr><th>Документ</th><th>Статус проверки</th></tr>
+<tr><td>Кодекс РК «О недрах и недропользовании» от 27.12.2017 № 125-VI ЗРК</td><td><span class="tag">Сверить</span></td></tr>
+<tr><td>Экологический кодекс РК от 02.01.2021 № 400-VI ЗРК</td><td><span class="tag">Сверить</span></td></tr>
+<tr><td>Земельный кодекс РК от 20.06.2003 № 442-II</td><td><span class="tag">Сверить</span></td></tr>
+<tr><td>Водный кодекс РК (действующая редакция)</td><td><span class="tag warn">Уточнить реквизиты</span></td></tr>
+<tr><td>Лесной кодекс РК от 08.07.2003 № 477-II (для земель лесного фонда)</td><td><span class="tag">Сверить</span></td></tr>
+<tr><td>Закон РК «О гражданской защите» от 11.04.2014 № 188-V</td><td><span class="tag">Сверить</span></td></tr>
+<tr><td>Трудовой кодекс РК от 23.11.2015 № 414-V</td><td><span class="tag">Сверить</span></td></tr>
+<tr><td>Единые правила по рациональному и комплексному использованию недр (приказ МЭ РК от 15.06.2018 № 239)</td><td><span class="tag">Сверить</span></td></tr>
+<tr><td>Правила консервации и ликвидации при разведке и добыче УВ</td><td><span class="tag warn">Уточнить реквизиты</span></td></tr>
+<tr><td>ГОСТ 17.5.3.04-83, ГОСТ 17.5.3.06-85</td><td><span class="tag">Сверить</span></td></tr>
+</table></div></section>
+
+<section id="s9"><h2>9. Нефункциональные требования</h2><ul>
+<li><b>Языки.</b> Интерфейс и шаблон на русском языке. Казахская версия — в следующем релизе.</li>
+<li><b>Адаптивность.</b> Корректная работа на экранах от 360 px; мастер заполнения удобен на планшете в поле.</li>
+<li><b>Производительность.</b> Открытие страницы ≤ 2 с, экспорт DOCX ≤ 5 с при 500 строках выработок.</li>
+<li><b>Персональные данные.</b> Хранение и обработка по Закону РК «О персональных данных и их защите» от 21.05.2013 № 94-V. Серверы размещаются на территории РК.</li>
+<li><b>Доступ.</b> Вход по email; черновики видны только автору и его организации.</li>
+<li><b>Резервное копирование.</b> Ежедневно, хранение 30 дней.</li></ul></section>
+
+<section id="s10"><h2>10. Модель данных</h2><div class="table-wrap"><table>
+<tr><th>Сущность</th><th>Ключевые поля</th></tr>
+<tr><td>Organization</td><td>id, название, БИН</td></tr>
+<tr><td>User</td><td>id, email, ФИО, организация, роль</td></tr>
+<tr><td>Specification (ТЗ)</td><td>id, статус, значения полей, даты создания и изменения</td></tr>
+<tr><td>Workings (выработка)</td><td>id, ТЗ, тип, номер, координаты, глубина, диаметр, объём, площадь</td></tr>
+<tr><td>Regulation (норма)</td><td>id, название, номер, дата, ссылка, действует, дата сверки</td></tr>
+</table></div></section>
+
+<section id="s11"><h2>11. Этапы</h2><div class="table-wrap"><table>
+<tr><th>Этап</th><th>Состав</th><th>Срок</th></tr>
+<tr><td>1. Прототип</td><td>Текстовая версия шаблона, макеты мастера</td><td>2 недели</td></tr>
+<tr><td>2. MVP</td><td>FR-1 – FR-14, экспорт DOCX/PDF</td><td>6 недель</td></tr>
+<tr><td>3. Пилот</td><td>3–5 недропользователей, сбор замечаний</td><td>4 недели</td></tr>
+<tr><td>4. Развитие</td><td>Казахский язык, ЭЦП, расчёт стоимости ликвидации</td><td>По итогам пилота</td></tr>
+</table></div></section>
+
+<section id="s12"><h2>12. Риски и открытые вопросы</h2><ul class="risk">
+<li>Перечень норм составлен по памяти. До запуска юрист должен сверить реквизиты и редакции.</li>
+<li>Нужен ли отдельный шаблон для подземных вод?</li>
+<li>Кто отвечает за ежеквартальную сверку нормативной базы?</li>
+<li>Нужна ли казахская версия ТЗ уже в MVP для закупов госкомпаний?</li></ul></section>
+
+<footer>PRD v0.1 · 02.10.2026 · черновик</footer>
+</main>
+</div>
+</body>
+</html>
